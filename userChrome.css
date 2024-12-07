@@ -1,187 +1,100 @@
-#nav-bar {
-  /* customize this value. */
-  --navbar-margin: -35px;
-
-  margin-top: var(--navbar-margin);
-  margin-bottom: 0;
-  z-index: -100;
-  transition: all 0.2s ease !important;
-  opacity: 0;
+:root {
+  --navbarWidth     : 55px;
+  --navbarMargin    : 0px;
+  --animationSpeed  : 0.15s;
+  --tab-max-width   : 5px;
+  --tab-min-height: 25px !important;
+  --arrowpanel-menuitem-padding: 8px 8px !important;
 }
 
+
+:root:not([uidensity="compact"]):not([uidensity="touch"])
+
+#urlbar-input {
+height: 20px !important;
+font-size: 12px !important;
+}
+
+#tabbrowser-tabs {
+    margin-top  : 0px !important;
+    margin-left : 0px !important;
+    height: 10px !important;
+}
+
+.tab-text {
+  margin-top:1px;
+  font-size: 9pt !important;
+}
+
+
+.tab-background {
+    border-radius: 20px 20px !important;
+    margin-bottom: 0px !important;
+    margin-top: 0px !important;
+}
+
+.tab-background:is([selected], [multiselected]){
+    background:linear-gradient(to right,#9AA5CD,#191A25);
+    opacity:30%;
+}
+
+#TabsToolbar{
+  z-index: 1000 !important;
+}
+
+.tabbrowser-tab[selected],[multiselected] {
+  color: burlywood !important;
+}
+
+.tabbrowser-tab:not([selected]):not(:hover) .tab-content {
+  opacity:50%;
+}
+
+ #TabsToolbar .tab-close-button {
+   opacity: 30%;
+}
+
+#tabs-newtab-button{
+  opacity: 50%;
+  align-items: right; 
+}
+
+#TabsToolbar .tab-icon-image {
+    height: 14px !important; /* Matches the smaller close button */
+    width: 14px !important;
+}
+
+
+#nav-bar {
+ margin-top: 0px;//var(--navbar-margin);
+ margin-bottom: 0px;
+  z-index: 0;
+  transition: all 0.2s ease !important;
+  opacity: 0.0;
+ // visibility: hidden;
+  #pageAction-panel-bookmark,
+  #star-button {
+    opacity:0.0;}
+}
 #navigator-toolbox:focus-within > #nav-bar,
 #navigator-toolbox:hover > #nav-bar
 {
-  margin-top: 0;
-  margin-bottom: var(--navbar-margin);
-  z-index: 20;
-  opacity: 0.8;
-}
-
-
-/* Bookmark and context menu spacing */
-menupopup > menuitem, menupopup > menu {padding-block: 4px !important; min-height: 0px !important;}
-
-/* Options menu spacing*/
-:root {--arrowpanel-menuitem-padding: 8px 8px !important;}
-
-/* Disable rounded tabs
-.tab-background{border-radius: 10px 10px 10px 10px !important; margin-bottom: 3px !important;}*
-.tabbrowser-tab>.tab-stack>.tab-background {
-    border-radius: 15px !important;
-}
-*/
-/*
-#TabsToolbar{
-   display: none
-}
-#nav-bar {
-   display: none
-}
-*/
-
-:root{ --uc-navbar-transform: -40px }
-:root[uidensity="compact"]{ --uc-navbar-transform: -34px }
-}
-#navigator-toolbox > div{ display: contents; }
-:root[sessionrestored] :where(#nav-bar,#PersonalToolbar,#tab-notification-deck,.global-notificationbox){
-  transform: translateY(var(--uc-navbar-transform))
-
-:root:is([customizing],[chromehidden*="toolbar"]) :where(#nav-bar,#PersonalToolbar,#tab-notification-deck,.global-notificationbox){
-  transform: none !important;
-  opacity: 1 !important;
-}
-
-#nav-bar:not([customizing]){
-  opacity: 0;
-  transition:  transform 300ms ease 0.8s, opacity 50ms ease 0.3s !important;
-  position: relative;
-  z-index: 2;
-}
-#TabsToolbar{ position: relative; z-index: 3 }
-
-/* Show when toolbox is focused, like when urlbar has received focus */
-#navigator-toolbox:focus-within > .browser-toolbar{
-  transform: translateY(0);
-  opacity: 1;
-  transition-duration: 200ms, 100ms !important;
-  transition-delay: 0s !important;
-}
-/* Show when toolbox is hovered */
-#titlebar:hover ~ .browser-toolbar,
-#nav-bar:hover,
-#nav-bar:hover + #PersonalToolbar{
-  transform: translateY(0);
-  opacity: 1;
-  transition-duration: 100ms, 50ms !important;
-  transition-delay: 0s !important;
-}
-
-/* Bookmarks toolbar needs so extra rules */
-#PersonalToolbar{ transition: transform 400ms ease 1.8s !important; position: relative; z-index: 1 }
-
-/* Move up the content view */
-:root[sessionrestored]:not([inFullscreen]) > body > #browser{ margin-top: var(--uc-navbar-transform); }
-
-
-/* Tab hide based on https://mrotherguy.github.io/firefox-csshacks/?file=autohide_tabstoolbar.css */
-#nav-bar {
-    margin-bottom: 2px !important;
+  margin-top: 0px;
+  margin-bottom: 0px;//: var(--navbar-margin);
+  z-index: 100;
+  order: 0;
+  opacity: 0.5;
+//visibility: visible;
+  #pageAction-panel-bookmark,
+  #star-button {
+    list-style-image: "fav.png";
   }
-
-  :root:not([customizing]) #navigator-toolbox{
-    position: relative !important;
-    z-index: 1;
-  }
-
-  #navigator-toolbox:not(:hover) > #titlebar{
-    -moz-window-dragging: no-drag !important;
-    pointer-events: none
-  }
-
-  :root:not([customizing]) #navigator-toolbox:hover,
-  :root:not([customizing]) #titlebar{
-    margin-bottom: calc(0px - 2 * var(--tab-block-margin) - var(--tab-min-height)) !important;
-  }
-  #TabsToolbar:not([customizing]){ visibility: hidden; transition: visibility 0ms linear 450ms }
-
-  #navigator-toolbox,
-  #titlebar{ transition: margin-bottom 48ms linear 450ms }
-
-  #navigator-toolbox:hover{ transition-delay: 0s }
-  #navigator-toolbox:hover > #titlebar{
-    margin-bottom: 0px !important;
-    transition-delay: 0s;
-  }
-
-  #navigator-toolbox:hover #TabsToolbar{
-    visibility: visible;
-    transition-delay: 18ms;
-  }
-  /* These rules make sure that height of tabs toolbar doesn't exceed tab-min-height */
-  #tabbrowser-tabs:not([secondarytext-unsupported]) .tab-label-container{
-    max-height: var(--tab-min-height) !important;
-  }
-  .tab-label{ line-height: 18px !important; }
-  :root[uidensity="compact"] .tab-label{ line-height: 18px !important; }
-
-
-/* Bookmark and context menu spacing */
-menupopup > menuitem, menupopup > menu {padding-block: 4px !important; min-height: 0px !important;}
-
-/* Options menu spacing*/
-:root {--arrowpanel-menuitem-padding: 8px 8px !important;}
-
-/* Disable rounded tabs
-.tab-background{border-radius: 10px 10px 10px 10px !important; margin-bottom: 3px !important;}*
-.tabbrowser-tab>.tab-stack>.tab-background {
-    border-radius: 50px !important;
-}*/
-
-
-:root{ --uc-navbar-transform: -40px }
-:root[uidensity="compact"]{ --uc-navbar-transform: -34px }
-}
-#navigator-toolbox > div{ display: contents; }
-:root[sessionrestored] :where(#nav-bar,#PersonalToolbar,#tab-notification-deck,.global-notificationbox){
-  transform: translateY(var(--uc-navbar-transform))
-
-:root:is([customizing],[chromehidden*="toolbar"]) :where(#nav-bar,#PersonalToolbar,#tab-notification-deck,.global-notificationbox){
-  transform: none !important;
-  opacity: 1 !important;
 }
 
-#nav-bar:not([customizing]){
-  opacity: 0;
-  transition:  transform 300ms ease 0.8s, opacity 50ms ease 0.3s !important;
-  position: relative;
-  z-index: 2;
-}
-#TabsToolbar{ position: relative; z-index: 3 }
 
-/* Show when toolbox is focused, like when urlbar has received focus */
-#navigator-toolbox:focus-within > .browser-toolbar{
-  transform: translateY(0);
-  opacity: 1;
-  transition-duration: 200ms, 100ms !important;
-  transition-delay: 0s !important;
-}
-/* Show when toolbox is hovered */
-#titlebar:hover ~ .browser-toolbar,
-#nav-bar:hover,
-#nav-bar:hover + #PersonalToolbar{
-  transform: translateY(0);
-  opacity: 1;
-  transition-duration: 100ms, 50ms !important;
-  transition-delay: 0s !important;
+menupopup > menuitem, menupopup > menu{
+  padding-block: 4px !important;
+  min-height: 0px !important;
 }
 
-/* Bookmarks toolbar needs so extra rules */
-#PersonalToolbar{ transition: transform 400ms ease 1.8s !important; position: relative; z-index: 1 }
-
-/* Move up the content view */
-:root[sessionrestored]:not([inFullscreen]) > body > #browser{ margin-top: var(--uc-navbar-transform); }
-.tab-background {
-background: gray !important;
-border-radius: 5px !important; /* corners */
-}
+///////////////////////////////////////////////////////////////////////////
