@@ -1,0 +1,194 @@
+
+
+:root {
+  --navbarWidth     : 55px;
+  --navbarMargin    : 0px;
+  --animationSpeed  : 0.15s;
+  --tab-max-width   : 5px;
+  --tab-min-height: 25px !important;
+  --arrowpanel-menuitem-padding: 8px 8px !important;
+}
+
+#urlbar-input {
+//height: 20px !important;
+font-size: 12px !important;
+}
+
+#tabbrowser-tabs {
+    margin-top  : 0px !important;
+    margin-left : 0px !important;
+    height: 20px !important;
+}
+.tab-text {
+  margin-top:1px;
+  font-size: 9pt !important;
+}
+
+.tab-background {
+    border-radius: 20px 20px !important;
+    margin-bottom: 5px !important;
+    margin-left : 5px !important;
+    margin-top: 5px !important;
+}
+
+.tab-background:is([selected], [multiselected]){
+    background:linear-gradient(to right,#9AA5CD,#191A25);
+    opacity:30%;
+}
+
+
+
+.tabbrowser-tab[selected],[multiselected] {
+  color: burlywood !important;
+}
+
+.tabbrowser-tab:not([selected]):not(:hover) .tab-content {
+  opacity:50%;
+}
+
+ #TabsToolbar .tab-close-button {
+   opacity: 30%;
+}
+
+#tabs-newtab-button{
+  opacity: 50%;
+  align-items: right;
+}
+
+
+/*
+#TabsToolbar .tab-icon-image {
+    height: 14px !important; /* Matches the smaller close button
+    width: 14px !important;
+}
+*/
+///////////////////////////////////////////////////////////////////////////////////////////
+/* This style hides the main toolbar and shows it when the cursor is over the tabs toolbar as well as whenever the focus is inside nav-bar, such as when urlbar is focused. */
+
+:root{
+  --uc-navbar-transform: -35px;
+  --uc-autohide-toolbar-delay: 0.2s;
+  --uc-autohide-toolbar-duration: 200ms;
+}
+:root[uidensity="compact"]{ --uc-navbar-transform: -40px }
+
+#navigator-toolbox > div{ display: contents; }
+:root[sessionrestored] :where(#nav-bar,#PersonalToolbar,#tab-notification-deck,.global-notificationbox){
+  transform: translateY(var(--uc-navbar-transform))
+}
+:root:is([customizing],[chromehidden*="toolbar"]) :where(#nav-bar,#PersonalToolbar,#tab-notification-deck,.global-notificationbox){
+  transform: none !important;
+  opacity: 1 !important;
+}
+
+#nav-bar:not([customizing]){
+  opacity: 0;
+  transition:  transform var(--uc-autohide-toolbar-duration) ease var(--uc-autohide-toolbar-delay), opacity var(--uc-autohide-toolbar-duration) ease var(--uc-autohide-toolbar-delay) !important;
+  position: relative;
+  z-index: 2;
+}
+#titlebar{ position: relative; z-index: 3 }
+
+#navigator-toolbox,
+#sidebar-box,
+#sidebar-main,
+#sidebar-splitter,
+#tabbrowser-tabbox{
+  z-index: auto !important;
+}
+/* Show when toolbox is focused, like when urlbar has received focus */
+#navigator-toolbox:focus-within > .browser-toolbar{
+  transform: translateY(0);
+  opacity: 1;
+  transition-duration: var(--uc-autohide-toolbar-duration), var(--uc-autohide-toolbar-duration) !important;
+  transition-delay: 0s !important;
+}
+/* Show when toolbox is hovered */
+#titlebar:hover ~ .browser-toolbar,
+.browser-titlebar:hover ~ :is(#nav-bar,#PersonalToolbar),
+#nav-bar:hover,
+#nav-bar:hover + #PersonalToolbar{
+  transform: translateY(0);
+  opacity: 1;
+  transition-duration: var(--uc-autohide-toolbar-duration), var(--uc-autohide-toolbar-duration) !important;
+  transition-delay: 0s !important;
+}
+:root[sessionrestored] #urlbar[popover]{
+  opacity: 0;
+  pointer-events: none;
+  transition: transform var(--uc-autohide-toolbar-duration) ease var(--uc-autohide-toolbar-delay), opacity var(--uc-autohide-toolbar-duration) ease var(--uc-autohide-toolbar-delay);
+  transform: translateY(var(--uc-navbar-transform));
+}
+#mainPopupSet:has(> [panelopen]:not(#ask-chat-shortcuts)) ~ toolbox #urlbar[popover],
+.browser-titlebar:is(:hover,:focus-within) ~ #nav-bar #urlbar[popover],
+#nav-bar:is(:hover,:focus-within) #urlbar[popover],
+#urlbar-container > #urlbar[popover]:is([focused],[open]){
+  opacity: 1;
+  pointer-events: auto;
+  transition-delay: 0ms;
+  transform: translateY(0);
+}
+#urlbar-container > #urlbar[popover]:is([focused],[open]){
+ transition-duration: 100ms; /* Faster when focused */
+}
+/* This ruleset is separate, because not having :has support breaks other selectors as well */
+#mainPopupSet:has(> [panelopen]:not(#ask-chat-shortcuts)) ~ #navigator-toolbox > .browser-toolbar{
+  transition-delay: 33ms !important;
+  transform: translateY(0);
+  opacity: 1;
+}
+/* If tabs are in sidebar then nav-bar doesn't normally have its own background - so we nee to add it back */
+#nav-bar.browser-titlebar{
+  background: inherit;
+}
+#toolbar-menubar:not([autohide="true"]) ~ #nav-bar.browser-titlebar{
+  background-position-y: -28px; /* best guess, could vary */
+  border-top: none !important;
+}
+
+/* Bookmarks toolbar needs so extra rules */
+#PersonalToolbar{ transition: transform var(--uc-autohide-toolbar-duration) ease var(--uc-autohide-toolbar-delay) !important; position: relative; z-index: 1 }
+
+/* Move up the content view */
+:root[sessionrestored]:not([inFullscreen],[chromehidden~="toolbar"]) > body > #browser{ margin-top: var(--uc-navbar-transform); }
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+//:root:not([uidensity="compact"]):not([uidensity="touch"])
+
+/**/
+
+#nav-bar {
+ //margin-top: 0px;//var(--navbar-margin);
+ //margin-bottom: 0px;
+  //z-index: 0;
+  transition: all 0.2s ease !important;
+  //opacity: 0.0;
+ // visibility: hidden;
+  #pageAction-panel-bookmark,
+  #star-button {
+    opacity:0.5;}
+}
+#navigator-toolbox:focus-within > #nav-bar,
+#navigator-toolbox:hover > #nav-bar
+{
+  //margin-top: 0px;
+  //margin-bottom: 0px;//: var(--navbar-margin);
+  //z-index: 100;
+  //order: 0;
+  opacity: 0.5 !important;
+//visibility: visible;
+  #pageAction-panel-bookmark,
+  #star-button {
+    list-style-image: "fav.png";
+  }
+}
+
+
+menupopup > menuitem, menupopup > menu{
+  padding-block: 4px !important;
+  min-height: 0px !important;
+}
+
+///////////////////////////////////////////////////////////////////////////
